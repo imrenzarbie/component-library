@@ -30,8 +30,7 @@ export default defineConfig({
             entry: path.resolve(__dirname, "src/index.ts"),
             name: "ComponentLibrary", // This is the global variable name for IIFE format
             formats: ["es", "cjs"], // Output both ES Module and CommonJS formats
-            fileName: (format) =>
-                `component-library.${format === "es" ? "mjs" : "cjs"}`,
+            fileName: (format) => `index.${format === "es" ? "mjs" : "cjs"}`,
         },
         rollupOptions: {
             // Make sure to exclude dependencies from your bundle, otherwise they'll be part of the build
