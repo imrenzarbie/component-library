@@ -28,7 +28,7 @@ export default defineConfig({
             name: "ComponentLibrary", // This is the global variable name for IIFE format
             formats: ["es", "cjs"], // Output both ES Module and CommonJS formats
             fileName: (format) =>
-                `benco-component-library.${format === "es" ? "mjs" : "cjs"}`,
+                `component-library.${format === "es" ? "mjs" : "cjs"}`,
         },
         rollupOptions: {
             // Make sure to exclude dependencies from your bundle, otherwise they'll be part of the build
