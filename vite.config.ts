@@ -4,13 +4,8 @@ import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
-import path, { resolve } from "path";
-import { fileURLToPath } from "node:url";
-import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
-const dirname =
-    typeof __dirname !== "undefined"
-        ? __dirname
-        : path.dirname(fileURLToPath(import.meta.url));
+import path from "path";
+import storybookTest from "@storybook/addon-vitest/vitest-plugin";
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
@@ -18,13 +13,21 @@ export default defineConfig({
         react(),
         dts({
             // Configuration for vite-plugin-dts
-            insertTypesEntry: true, // Inserts `export * from './src'` into the main d.ts file
+            //insertTypesEntry: true, // Inserts `export * from './src'` into the main d.ts file
+            // Enable type bundling into a single .d.ts file
+            rollupTypes: true,
+            // Disable the entry export mechanism, as rollupTypes handles consolidation
+            insertTypesEntry: false,
+            // Ensure only files in 'src' are included for type generation by the plugin.
+            // This is crucial to prevent external files like vite.config.ts from being processed.
+            include: ["src/**/*"],
+            tsconfigPath: path.resolve(__dirname, "tsconfig.app.json"),
         }),
     ],
     build: {
         lib: {
             // Could also be a dictionary or array of multiple entry points
-            entry: resolve(__dirname, "src/index.ts"),
+            entry: path.resolve(__dirname, "src/index.ts"),
             name: "ComponentLibrary", // This is the global variable name for IIFE format
             formats: ["es", "cjs"], // Output both ES Module and CommonJS formats
             fileName: (format) =>
@@ -51,9 +54,9 @@ export default defineConfig({
                 plugins: [
                     // The plugin will run tests for the stories defined in your Storybook config
                     // See options at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon#storybooktest
-                    storybookTest({
-                        configDir: path.join(dirname, ".storybook"),
-                    }),
+                    // storybookTest({
+                    //     configDir: path.join(__dirname, ".storybook"),
+                    // }),
                 ],
                 test: {
                     name: "storybook",
