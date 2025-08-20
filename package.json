@@ -1,5 +1,5 @@
 {
-    "name": "@Benco-Development/benco-component-library",
+    "name": "@imrenzarbie/component-library",
     "version": "0.0.1",
     "type": "module",
     "main": "dist/index.cjs",
