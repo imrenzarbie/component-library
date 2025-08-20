@@ -1,13 +1,16 @@
 /// <reference types="vitest/config" />
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
-import path,{ resolve } from 'path';
-import { fileURLToPath } from 'node:url';
-import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
-const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+import path, { resolve } from "path";
+import { fileURLToPath } from "node:url";
+import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
+const dirname =
+    typeof __dirname !== "undefined"
+        ? __dirname
+        : path.dirname(fileURLToPath(import.meta.url));
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
@@ -22,7 +25,7 @@ export default defineConfig({
         lib: {
             // Could also be a dictionary or array of multiple entry points
             entry: resolve(__dirname, "src/index.ts"),
-            name: "BencoComponentLibrary", // This is the global variable name for IIFE format
+            name: "ComponentLibrary", // This is the global variable name for IIFE format
             formats: ["es", "cjs"], // Output both ES Module and CommonJS formats
             fileName: (format) =>
                 `benco-component-library.${format === "es" ? "mjs" : "cjs"}`,
