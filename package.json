@@ -1,5 +1,5 @@
 {
-    "name": "@my-username-here/component-library",
+    "name": "@imrenzarbie/component-library",
     "version": "0.0.2",
     "type": "module",
     "main": "dist/index.cjs",
